@@ -5154,10 +5154,12 @@ var $author$project$Lobby$Model = function (debugString) {
 						return function (toggleOptions) {
 							return function (toggleView) {
 								return function (showFullRooms) {
-									return function (user) {
-										return function (allGames) {
-											return function (ignoredGames) {
-												return {allGames: allGames, colorInProgress: colorInProgress, debugString: debugString, ignoredGames: ignoredGames, nameInProgress: nameInProgress, rooms: rooms, showFullRooms: showFullRooms, sorting: sorting, toggleModal: toggleModal, toggleOptions: toggleOptions, toggleView: toggleView, user: user};
+									return function (showEmptyRooms) {
+										return function (user) {
+											return function (allGames) {
+												return function (ignoredGames) {
+													return {allGames: allGames, colorInProgress: colorInProgress, debugString: debugString, ignoredGames: ignoredGames, nameInProgress: nameInProgress, rooms: rooms, showEmptyRooms: showEmptyRooms, showFullRooms: showFullRooms, sorting: sorting, toggleModal: toggleModal, toggleOptions: toggleOptions, toggleView: toggleView, user: user};
+												};
 											};
 										};
 									};
@@ -5185,7 +5187,7 @@ var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Lobby$init = function (_v0) {
 	return _Utils_Tuple2(
 		$author$project$Lobby$Model('Initialized model.')('')('')($elm$core$Maybe$Nothing)(
-			_Utils_Tuple2('room_name', false))(false)(false)('rooms')(true)(
+			_Utils_Tuple2('room_name', false))(false)(false)('rooms')(true)(true)(
 			A7($author$project$User$User, 'Uninitialized', '', '#555759', 0, 0, false, false))(_List_Nil)($elm$core$Set$empty),
 		$elm$core$Platform$Cmd$none);
 };
@@ -5923,6 +5925,12 @@ var $author$project$Lobby$update = F2(
 							model,
 							{showFullRooms: !model.showFullRooms}),
 						$elm$core$Platform$Cmd$none);
+				case 'ToggleShowEmptyRooms':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{showEmptyRooms: !model.showEmptyRooms}),
+						$elm$core$Platform$Cmd$none);
 				default:
 					var ignoredGames = _v0.a;
 					return _Utils_Tuple2(
@@ -5943,6 +5951,7 @@ var $author$project$Lobby$SetSorting = F2(
 	});
 var $author$project$Lobby$ToggleModal = {$: 'ToggleModal'};
 var $author$project$Lobby$ToggleOptions = {$: 'ToggleOptions'};
+var $author$project$Lobby$ToggleShowEmptyRooms = {$: 'ToggleShowEmptyRooms'};
 var $author$project$Lobby$ToggleShowFullRooms = {$: 'ToggleShowFullRooms'};
 var $author$project$Lobby$ToggleView = function (a) {
 	return {$: 'ToggleView', a: a};
@@ -6548,8 +6557,8 @@ var $elm$core$List$filter = F2(
 			list);
 	});
 var $elm$core$List$sortBy = _List_sortBy;
-var $author$project$Lobby$drawRooms = F4(
-	function (mayberooms, _v0, ignoredGames, showFullRooms) {
+var $author$project$Lobby$drawRooms = F5(
+	function (mayberooms, _v0, ignoredGames, showFullRooms, showEmptyRooms) {
 		var key = _v0.a;
 		var asc = _v0.b;
 		if (mayberooms.$ === 'Nothing') {
@@ -6577,17 +6586,23 @@ var $author$project$Lobby$drawRooms = F4(
 				]);
 		} else {
 			var rooms = mayberooms.a;
+			var filterRooms1 = showEmptyRooms ? rooms : A2(
+				$elm$core$List$filter,
+				function (r) {
+					return r.current_players > 0;
+				},
+				rooms);
 			var filteredRooms = showFullRooms ? A2(
 				$elm$core$List$filter,
 				function (r) {
 					return !A2($elm$core$Set$member, r.game_name, ignoredGames);
 				},
-				rooms) : A2(
+				filterRooms1) : A2(
 				$elm$core$List$filter,
 				function (r) {
 					return (!A2($elm$core$Set$member, r.game_name, ignoredGames)) && (_Utils_cmp(r.current_players, r.max_players) < 0);
 				},
-				rooms);
+				filterRooms1);
 			var sortedRooms = function () {
 				switch (key) {
 					case 'room_name':
@@ -7067,18 +7082,28 @@ var $author$project$Lobby$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$text('Show full rooms')
-											]))
+											])),
+										A2(
+										$elm$html$Html$li,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class(
+												model.showEmptyRooms ? '' : 'inactive'),
+												$elm$html$Html$Events$onClick($author$project$Lobby$ToggleShowEmptyRooms)
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Show empty rooms')
+											])),
+										$author$project$Lobby$drawEmptyGameFilter(model.ignoredGames)
 									])),
 								A2(
 								$elm$html$Html$ul,
 								_List_Nil,
 								A2(
-									$elm$core$List$cons,
-									$author$project$Lobby$drawEmptyGameFilter(model.ignoredGames),
-									A2(
-										$elm$core$List$map,
-										$author$project$Lobby$drawGameFilter(model.ignoredGames),
-										model.allGames)))
+									$elm$core$List$map,
+									$author$project$Lobby$drawGameFilter(model.ignoredGames),
+									model.allGames))
 							])),
 						A2(
 						$elm$html$Html$div,
@@ -7303,7 +7328,7 @@ var $author$project$Lobby$view = function (model) {
 													]))
 											]))
 									]),
-									A4($author$project$Lobby$drawRooms, model.rooms, model.sorting, model.ignoredGames, model.showFullRooms)
+									A5($author$project$Lobby$drawRooms, model.rooms, model.sorting, model.ignoredGames, model.showFullRooms, model.showEmptyRooms)
 								])))
 					])),
 				A2(

@@ -52,6 +52,7 @@ type alias Model =
     toggleOptions : Bool,
     toggleView : String,
     showFullRooms : Bool,
+    showEmptyRooms : Bool,
     user : User,
     allGames : List ( String ),
     ignoredGames : Set ( String )
@@ -70,6 +71,7 @@ init _ =
     False
     False
     "rooms"
+    True
     True
     (User "Uninitialized" "" "#555759" 0 0 False False)
     []
@@ -94,6 +96,7 @@ type Msg
   | ToggleOptions
   | ToggleView String
   | ToggleShowFullRooms
+  | ToggleShowEmptyRooms
   | SetIgnoredGames (Set ( String ))
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -183,6 +186,9 @@ update msg model =
     ToggleShowFullRooms ->
       ( { model | showFullRooms =  not model.showFullRooms }, Cmd.none )
 
+    ToggleShowEmptyRooms ->
+      ( { model | showEmptyRooms =  not model.showEmptyRooms }, Cmd.none )
+
     SetIgnoredGames ignoredGames ->
       ( { model | ignoredGames = ignoredGames }, Cmd.none )
 
@@ -223,17 +229,23 @@ subscriptions _ =
 
 
 -- VIEW
-drawRooms : Maybe ( List (Room) ) -> (String, Bool) -> Set ( String ) -> Bool -> List ( Html Msg )
-drawRooms mayberooms (key, asc) ignoredGames showFullRooms = 
+drawRooms : Maybe ( List (Room) ) -> (String, Bool) -> Set ( String ) -> Bool -> Bool -> List ( Html Msg )
+drawRooms mayberooms (key, asc) ignoredGames showFullRooms showEmptyRooms = 
   case mayberooms of
      Nothing -> [ div [class "server_row"] [ div [ class "message--loading_rooms"] [ text "Loading rooms..." ] ] ]
      Just rooms ->
       let
+        filterRooms1 = 
+          if showEmptyRooms then
+            rooms
+          else
+            List.filter (\r -> r.current_players > 0) rooms
+
         filteredRooms =
           if showFullRooms then
-            List.filter (\r -> not (Set.member r.game_name ignoredGames)) rooms
+            List.filter (\r -> not (Set.member r.game_name ignoredGames)) filterRooms1
           else
-            List.filter (\r -> not (Set.member r.game_name ignoredGames) && (r.current_players < r.max_players)) rooms
+            List.filter (\r -> not (Set.member r.game_name ignoredGames) && (r.current_players < r.max_players)) filterRooms1
         
         sortedRooms =
           case key of
@@ -323,11 +335,11 @@ view model =
         [ h2 [] [ text "Filter Games" ]
         , ul []
           [ li [ class (if model.showFullRooms then "" else "inactive"), onClick ToggleShowFullRooms ] [ text "Show full rooms" ]
+          , li [ class (if model.showEmptyRooms then "" else "inactive"), onClick ToggleShowEmptyRooms ] [ text "Show empty rooms" ]
+          , drawEmptyGameFilter model.ignoredGames
           ]
         , ul []
-            (drawEmptyGameFilter model.ignoredGames ::
-            List.map (drawGameFilter model.ignoredGames) model.allGames)
-          
+          (List.map (drawGameFilter model.ignoredGames) model.allGames)
         ]
       , div [ class "sidebar_box sidebar_box--debug" ]
         [ h2 [] [ text "Debug" ]
@@ -351,7 +363,7 @@ view model =
               , div [ class "col_actions" ] [ button [ id "refresh", onClick Refresh ] [ text "Refresh" ] ]
               ]
             ]
-          , drawRooms model.rooms model.sorting model.ignoredGames model.showFullRooms
+          , drawRooms model.rooms model.sorting model.ignoredGames model.showFullRooms model.showEmptyRooms
           ]
         )
       ]
