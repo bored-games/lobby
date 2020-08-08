@@ -1,0 +1,822 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * aktiv-grotesk:
+ *   - http://typekit.com/eulas/00000000000000003b9b4066
+ *   - http://typekit.com/eulas/00000000000000003b9b4067
+ *   - http://typekit.com/eulas/00000000000000003b9b406a
+ *   - http://typekit.com/eulas/00000000000000003b9b406b
+ * aktiv-grotesk-condensed:
+ *   - http://typekit.com/eulas/00000000000000003b9ad12a
+ *   - http://typekit.com/eulas/00000000000000003b9ad12b
+ *   - http://typekit.com/eulas/00000000000000003b9ad12e
+ *   - http://typekit.com/eulas/00000000000000003b9ad12f
+ * aktiv-grotesk-extended:
+ *   - http://typekit.com/eulas/00000000000000003b9ad13a
+ *   - http://typekit.com/eulas/00000000000000003b9ad13b
+ *   - http://typekit.com/eulas/00000000000000003b9ad13e
+ *   - http://typekit.com/eulas/00000000000000003b9ad13f
+ * aktiv-grotesk-thin:
+ *   - http://typekit.com/eulas/00000000000000003b9ae0fd
+ *   - http://typekit.com/eulas/00000000000000003b9ae0fe
+ *
+ * © 2009-2020 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2020-03-04 14:21:56 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=kwd3flf&ht=tk&f=14032.14033.14034.14035.26893.26894.26897.26898.26909.26910.26913.26914.29382.29383&a=3477205&app=typekit&e=css");
+
+@font-face {
+font-family:"aktiv-grotesk";
+src:url("https://use.typekit.net/af/28158e/00000000000000003b9b4066/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/28158e/00000000000000003b9b4066/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/28158e/00000000000000003b9b4066/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk";
+src:url("https://use.typekit.net/af/386e17/00000000000000003b9b4067/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/386e17/00000000000000003b9b4067/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/386e17/00000000000000003b9b4067/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk";
+src:url("https://use.typekit.net/af/62681e/00000000000000003b9b406a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/62681e/00000000000000003b9b406a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/62681e/00000000000000003b9b406a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk";
+src:url("https://use.typekit.net/af/b739e6/00000000000000003b9b406b/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/b739e6/00000000000000003b9b406b/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/b739e6/00000000000000003b9b406b/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-condensed";
+src:url("https://use.typekit.net/af/739bc8/00000000000000003b9ad12a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/739bc8/00000000000000003b9ad12a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/739bc8/00000000000000003b9ad12a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-condensed";
+src:url("https://use.typekit.net/af/e25aad/00000000000000003b9ad12b/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/e25aad/00000000000000003b9ad12b/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/e25aad/00000000000000003b9ad12b/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-condensed";
+src:url("https://use.typekit.net/af/75d2b8/00000000000000003b9ad12e/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/75d2b8/00000000000000003b9ad12e/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/75d2b8/00000000000000003b9ad12e/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-condensed";
+src:url("https://use.typekit.net/af/a9b64d/00000000000000003b9ad12f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/a9b64d/00000000000000003b9ad12f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/a9b64d/00000000000000003b9ad12f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-extended";
+src:url("https://use.typekit.net/af/e10446/00000000000000003b9ad13a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/e10446/00000000000000003b9ad13a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/e10446/00000000000000003b9ad13a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-extended";
+src:url("https://use.typekit.net/af/ce6561/00000000000000003b9ad13b/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/ce6561/00000000000000003b9ad13b/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/ce6561/00000000000000003b9ad13b/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-extended";
+src:url("https://use.typekit.net/af/3f03c1/00000000000000003b9ad13e/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/3f03c1/00000000000000003b9ad13e/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/3f03c1/00000000000000003b9ad13e/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-extended";
+src:url("https://use.typekit.net/af/669c64/00000000000000003b9ad13f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/669c64/00000000000000003b9ad13f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/669c64/00000000000000003b9ad13f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-thin";
+src:url("https://use.typekit.net/af/266360/00000000000000003b9ae0fd/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n2&v=3") format("woff2"),url("https://use.typekit.net/af/266360/00000000000000003b9ae0fd/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n2&v=3") format("woff"),url("https://use.typekit.net/af/266360/00000000000000003b9ae0fd/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n2&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:200;
+}
+
+@font-face {
+font-family:"aktiv-grotesk-thin";
+src:url("https://use.typekit.net/af/e7779d/00000000000000003b9ae0fe/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i2&v=3") format("woff2"),url("https://use.typekit.net/af/e7779d/00000000000000003b9ae0fe/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i2&v=3") format("woff"),url("https://use.typekit.net/af/e7779d/00000000000000003b9ae0fe/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i2&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:200;
+}
+
+.tk-aktiv-grotesk { font-family: "aktiv-grotesk",sans-serif; }
+.tk-aktiv-grotesk-condensed { font-family: "aktiv-grotesk-condensed",sans-serif; }
+.tk-aktiv-grotesk-extended { font-family: "aktiv-grotesk-extended",sans-serif; }
+.tk-aktiv-grotesk-thin { font-family: "aktiv-grotesk-thin",sans-serif; }
+
+
+
+
+
+
+
+
+
+
+
+::selection {
+  background: transparent; /* Webkit Browsers */
+  text-shadow: none;
+}
+::-moz-selection {
+  background: transparent; /* Gecko Browsers */
+  text-shadow: none;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	word-wrap: break-word;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #cecfd5;
+  background: #13191f;
+}
+
+h2 {
+  margin: 0;
+  padding: 0.625rem 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "aktiv-grotesk-condensed";
+  color: #818386;
+  display: flex;
+  align-items: center;
+}
+
+
+a {
+	color: #4d6670;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1d4650;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.nav {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.0rem;
+}
+
+.nav_space {
+  flex: 1 1 10%;
+  text-align: right;
+  padding: 0.5rem 1.0rem 0;
+}
+
+.nav_box {
+  flex: 0 0 auto;
+  padding: 0.5rem 1.0rem;
+  border-right: 1px solid rgba(255, 255, 255, .05);
+  border-left: 1px solid rgba(0, 0, 0, .4);
+  color: #343537;
+}
+
+.nav_box:nth-of-type(2) {
+  border-left: 0;
+}
+
+.nav_box:nth-of-type(3) {
+  border-right: 0;
+}
+
+.nav_box a {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: "aktiv-grotesk-condensed";
+  color: #63666b;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: .2s linear all;
+}
+
+.nav_box a.active {
+  cursor: default;
+  color: #afb1b3;
+  text-shadow: 0 0 15px rgba(255, 255, 255, .3);
+}
+
+.nav_box a:not(.active):hover {
+  color: #d2d4d6;
+}
+
+.sidebar {
+  flex: 0 360px;
+  max-width: 360px;
+  min-width: 360px;
+  background: #0d1217;
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar_box {
+  margin: 2.0rem 1.0rem 0 2.0rem;
+}
+
+.sidebar_box--debug {
+  color: #555b61
+}
+
+.sidebar_box--stats,
+.sidebar_box--filter {
+  color: #7b8186
+}
+
+.sidebar_box ul {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar_box li {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: .1s linear opacity, .1s linear text-decoration;
+}
+
+.sidebar_box li.inactive {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.username {
+  display: inline-block;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.muted,
+.owner,
+.self {
+  height: 1.0rem;
+  width: 1.0rem;
+  display: inline-block;
+  margin-left: .25rem;
+  vertical-align: middle;
+  mask-size: 100% 100%;
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  background-color: #666;
+  margin-top: -3px;
+}
+
+.muted {
+  mask-image: url('../static/images/icons/mute.png');
+}
+
+.owner {
+  mask-image: url('../static/images/icons/owner.png');
+}
+
+.self {
+  background: radial-gradient(#fadb3e, #8c7d1a);
+  mask-image: url('../static/images/icons/star.png');
+}
+
+textarea, input[type="text"], select {
+  padding: 0.35rem 0.5rem;
+  background: #0f1215;
+  border-radius: 3px;
+  resize: none;
+  flex: 1 1 100%;
+  border: none;
+  color: #d0d0d0;
+  font-family: "Segoe UI";
+  font-size: 0.9rem;
+  box-shadow: 0 0 2px 1px inset rgba(0, 0, 0, .5);
+}
+
+.message__actions {
+  flex: 0;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle_options {
+  height: 1.25rem;
+  width: 1.25rem;
+  padding: 0;
+  background-color: #818386;
+  mask: url('../static/images/icons/settings.png') center center/1.25rem 1.25rem no-repeat;
+}
+
+
+.toggle_options:hover {
+  background: #bcbdc0;
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+.message--loading_rooms,
+.message--no_rooms {
+  opacity: 0.5;
+}
+
+.server_table {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  margin: 1.0rem 2.0rem;
+  background: #253037;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, .2);
+}
+
+.server_headers {
+  background: #1b232a !important;
+  color: #44545e;
+}
+
+.server_headers h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "aktiv-grotesk-condensed";
+  cursor: pointer;
+  transition: .1s linear color;
+}
+
+.server_headers h2:hover {
+  color: #a4afb5;
+}
+
+.server_row {
+  display: flex;
+  flex: 1 1 100%;
+}
+
+.server_row:nth-of-type(odd) {
+
+  background: #29333b;
+}
+
+.server_row > div {
+  /* overflow: hidden;  */
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.col_special {
+  flex: 1 1;
+  min-width: 5rem;
+}
+
+.col_players {
+  flex: 1 1;
+  justify-content: flex-end;
+  min-width: 4rem;
+  color: #707377;
+}
+
+.col_room_name {
+  flex: 20 20;
+}
+
+.col_game_name {
+  flex: 20 20;
+}
+
+.col_actions {
+  flex: 10 10;
+  justify-content: flex-end;
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+button {
+  -webkit-appearance: button;
+  background: #6688ba;
+  color: #fdfdfe;
+  font-weight: 600;
+  margin: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.35rem 0.35rem;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, .15);
+  cursor: pointer;
+  line-height: 1;
+  box-sizing: unset;
+  overflow: visible;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover {
+  background: #5778ab;
+  color: #fdfdfe;
+  cursor: pointer;
+}
+
+
+.button:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus,
+button:focus {
+  color: #fafcfc;
+  border: 1px solid #eaeaea;
+  border-color: rgba(255, 255, 255, .3);
+}
+
+button#refresh,
+button#player_count {
+  background: transparent;
+  font-size: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  padding: 0.25rem;
+  background-size: 1.25rem 1.25rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  border: 0;
+  opacity: 0.35;
+}
+
+button#refresh:hover,
+button#player_count:hover {
+  opacity: 1;
+}
+
+button#player_count {
+  background-image: url('../static/images/icons/users.svg');
+}
+
+button#refresh {
+  background-image: url('../static/images/icons/reload.svg');
+}
+
+.button--big {
+  padding: 0.5rem !important;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.button--cancel {
+  background: #be4a4a;
+  color: #fef6f6;
+}
+
+.button--cancel:hover {
+  background: #ac3535;
+}
+
+
+.lightbox {
+  background: rgba(0, 0, 0, .75);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #1b232a;
+  padding: 1.0rem 1.0rem 0.5rem 1.0rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 8px rgba(0, 0, 0, .5);
+}
+
+.modal_row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.modal_row select {
+  margin-left: 1.0rem;
+}
+
+.modal h1 {
+  margin: 0 0 1.0rem 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+.settings__flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+}
+
+.settings__flexbox input,
+.settings__flexbox select {
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.settings__flexbox input[type="text"] {
+  margin-right: 0.25rem;
+  background: #1d2731;
+  box-shadow: none;
+  box-shadow: 0 0 1px 0 inset #2d3741;
+  min-width: 0;
+}
+
+.settings__flexbox select {
+  margin-left: 0.25rem;
+  cursor: pointer;
+  background: #1d2731;
+  box-shadow: none;
+  box-shadow: 0 0 1px 0 inset #2d3741;
+  min-width: 0;
+}
+
+
+.setting__input {
+  flex: 1 1 50%;
+  max-width: 50%;
+  display: flex;
+}
+
+.setting__checkbox {
+  white-space: nowrap;
+  flex: 1 1 50%;
+  color: #78787a;
+}
+
+.setting__submit {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 24px;
+  position: relative;
+  margin: 8px 8px 8px 4px;
+}
+
+.checkbox label {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to top, #000 0%, #121213 100%);
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, .2);
+}
+
+.checkbox label:after {
+  content: '';
+  width: 11px;
+  height: 7px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #cdcdce;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+  opacity: 0.3;
+}
+
+.checkbox input[type=checkbox] {
+  visibility: hidden;
+}
+
+.checkbox input[type=checkbox]:checked+label:after {
+  opacity: 1;
+}
+
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative;
+  /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  /* opinion 2 */
+  font-size: .9em;
+  /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  /* opinion 4 */
+  z-index: 1001;
+  /* absurdity 1 */
+}
+
+[tooltip]::after {
+  content: attr(tooltip);
+  /* magic! */
+
+  /* most of the rest of this is opinion */
+  text-align: center;
+
+  /* 
+    Let the content set the size of the tooltips 
+    but this will also keep them from being obnoxious
+    */
+  min-width: 2.5em;
+  max-width: 30em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: .5rem;
+  border-radius: .2rem;
+  box-shadow: 0 0em 8px 4px rgba(0, 0, 0, 0.5), 0 0em 1px 1px rgba(255, 255, 255, 0.2);
+  background: #2c2d2f;
+  color: #a6a6a6;
+  font-size: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .8);
+  z-index: 1000;
+  /* absurdity 2 */
+  font-weight: 200;
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #2c2d2f;
+}
+
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #2c2d2f;
+}
+
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #2c2d2f;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #2c2d2f;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 200ms ease-out forwards;
+  animation-delay: .5s;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 200ms ease-out forwards;
+  animation-delay: .5s;
+}
