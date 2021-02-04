@@ -15,13 +15,14 @@ import Chat exposing (Chatline)
 
 import Browser
 import Browser.Events
+import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (style, type_, title, placeholder, value, class, id, attribute, href)
 import Html.Events exposing (onInput, onSubmit, onClick)
-import Set exposing (Set)
-import Time
 import Json.Encode
 import Json.Decode
+import Set exposing (Set)
+import Time
 
 
 -- MAIN
@@ -41,11 +42,21 @@ type alias JSONMessage =
   , content : Json.Encode.Value
   }
 
+type GameName
+  = Canoe
+  | Codenames
+  | Homeworlds
+  | RicochetRobots
+  | Unknown
+
 
 type alias Model =
   { debugString : String,
     nameInProgress : String,
     colorInProgress : String,
+    roomNameInProgress : String,
+    roomNumInProgress : String,
+    roomGameInProgress : String,
     rooms : Maybe ( List (Room) ),
     sorting : (String, Bool),
     toggleModal : Bool,
@@ -64,6 +75,9 @@ init : () -> (Model, Cmd Msg)
 init _ =
   (Model
     "Initialized model."
+    ""
+    ""
+    ""
     ""
     ""
     Nothing
@@ -85,10 +99,15 @@ init _ =
 type Msg
   = Ping Time.Posix
   | GetJSON Json.Encode.Value
+  | CreateRoom
+  | GetRedirect Json.Encode.Value
   | GetRoomsList Json.Encode.Value
   | GetUser Json.Encode.Value
   | SetName String
   | SetColor String
+  | SetRoomName String
+  | SetRoomMaxPlayers String
+  | SetRoomGameName String
   | SetSorting String Bool
   | Refresh
   | UpdateSettings
@@ -121,12 +140,33 @@ update msg model =
               update (GetRoomsList content) model
             "update_user" ->
               update (GetUser content) model
+            "redirect" ->
+              update (GetRedirect content) model
 
             _ ->
               ((Debug.log "Error: unknown code in JSON message" model), Cmd.none ) -- Error: missing code
 
         Err _ ->
           ( { model | debugString = ("Bad JSON: " ++ (Json.Encode.encode 0 json))}, Cmd.none )
+
+    CreateRoom ->
+      ( model
+      , outputPort (Json.Encode.encode
+                        0
+                      ( Json.Encode.object
+                      [ ( "action", Json.Encode.string "create_room"),
+                        ( "content", Json.Encode.object [ ("room_name", Json.Encode.string model.roomNameInProgress),
+                                                          ("game_name", Json.Encode.string model.roomGameInProgress),
+                                                          ("player_limit", Json.Encode.string model.roomNumInProgress) ] ) ] ) ) )
+        -- url = getURL (getGameName model.roomGameInProgress) ++ model.roomNameInProgress
+
+    GetRedirect json ->
+      case Json.Decode.decodeValue Json.Decode.string json of
+        Ok url ->
+          ( { model | debugString = "URL: " ++ url }, Cmd.none )
+          -- (model , Nav.load url )
+        Err _ ->
+          ( { model | debugString = "Error parsing userlist JSON"}, Cmd.none )
 
           
     GetRoomsList json ->
@@ -160,6 +200,15 @@ update msg model =
       
     SetColor color ->
       ( { model | colorInProgress = color }, Cmd.none )
+      
+    SetRoomName str ->
+      ( { model | roomNameInProgress = str }, Cmd.none )
+      
+    SetRoomMaxPlayers str ->
+      ( { model | roomNumInProgress = str }, Cmd.none )
+      
+    SetRoomGameName str ->
+      ( { model | roomGameInProgress = str }, Cmd.none )
       
     UpdateSettings ->
       let
@@ -262,15 +311,37 @@ drawRooms mayberooms (key, asc) ignoredGames showFullRooms showEmptyRooms =
             else
               List.reverse (List.map drawRoom rs)
 
+getURL : GameName -> String
+getURL gn =
+  case gn of
+     Canoe -> "http://localhost:8002/Canoe.html?room="
+     Codenames -> "http://localhost:8004/Codenames.html?room="
+     Homeworlds -> "http://localhost:8005/Homeworlds.html?room="
+     RicochetRobots -> "http://localhost:8003/Robots.html?room="
+     Unknown -> "http://localhost:8001/Lobby.html?room="
+     
+getGameName : String -> GameName
+getGameName s =
+  case s of
+     "Canoe" -> Canoe
+     "Codenames" -> Codenames
+     "Homeworlds" -> Homeworlds
+     "Ricochet Robots" -> RicochetRobots
+     _ -> Unknown
+
 drawRoom : Room ->  Html Msg
 drawRoom room =
-  div [class "server_row"]
-  [ div [ class "col_players" ] [ text (String.fromInt room.current_players ++ "/" ++ String.fromInt room.max_players ) ]
-  , div [ class "col_room_name" ] [ text room.room_name ]
-  , div [ class "col_game_name" ] [ text room.game_name ]
-  , div [ class "col_special" ] [  ]
-  , div [ class "col_actions" ] [ a [ class "button", href ("http://localhost:8000/Robots.html?room=" ++ room.room_name) ] [ text "Join" ] ]
-  ]
+  let
+    gn = getGameName room.game_name
+    url = getURL gn
+  in
+    div [class "server_row"]
+    [ div [ class "col_players" ] [ text (String.fromInt room.current_players ++ "/" ++ String.fromInt room.max_players ) ]
+    , div [ class "col_room_name" ] [ text room.room_name ]
+    , div [ class "col_game_name" ] [ text room.game_name ]
+    , div [ class "col_special" ] [  ]
+    , div [ class "col_actions" ] [ a [ class "button", href (url ++ room.room_name) ] [ text "Join" ] ]
+    ]
 
 drawGameFilter : Set String -> String -> Html Msg
 drawGameFilter ignoredGames game =
@@ -285,6 +356,7 @@ drawEmptyGameFilter ignoredGames =
     li [ class "inactive", onClick (SetIgnoredGames (Set.remove "" ignoredGames))] [ text "Show rooms without games" ]
   else
     li [ class "", onClick (SetIgnoredGames (Set.insert "" ignoredGames))] [ text "Show rooms without games" ]
+
 
 
 
@@ -370,19 +442,20 @@ view model =
     , div [ class ("lightbox" ++ if model.toggleModal then "" else " hidden") ]
       [ div [ class "modal" ]
         [ h1 [ ] [ text "Create room" ]
-        , div [ class "modal_row" ] [ input [ type_ "text", placeholder "Room name" ] [] ]
+        , div [ class "modal_row" ] [ input [ type_ "text", placeholder "Room name", onInput SetRoomName ] [] ]
         , div [ class "modal_row" ]
-          [ input [ type_ "text", placeholder "Max players" ] []
-          , select [ class "game_name" ]
+          [ input [ type_ "text", placeholder "Max players", onInput SetRoomMaxPlayers ] []
+          , select [ class "game_name", onInput SetRoomGameName ]
             [ option [ value "" ] [ text "No game (select one later)" ]
-            , option [ value "canoe"] [ text "Canoe" ]
-            , option [ value "codenames"] [ text "Codenames" ]
-            , option [ value "robots" ] [ text "Ricochet Robots" ]
+            , option [ value "Canoe"] [ text "Canoe" ]
+            , option [ value "Codenames"] [ text "Codenames" ]
+            , option [ value "Homeworlds"] [ text "Homeworlds" ]
+            , option [ value "Ricochet Robots" ] [ text "Ricochet Robots" ]
             ]
           ]
         , div [ class "modal_row" ]
           [ button [ class "button--cancel button--big", onClick ToggleModal ] [ text "Cancel" ]
-          , button [ class "button--create button--big" ] [ text "Create room" ] ]
+          , button [ class "button--create button--big", onClick CreateRoom ] [ text "Create room" ] ]
         ]
       ]
     ]

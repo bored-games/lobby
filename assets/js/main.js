@@ -5148,17 +5148,23 @@ var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Lobby$Model = function (debugString) {
 	return function (nameInProgress) {
 		return function (colorInProgress) {
-			return function (rooms) {
-				return function (sorting) {
-					return function (toggleModal) {
-						return function (toggleOptions) {
-							return function (toggleView) {
-								return function (showFullRooms) {
-									return function (showEmptyRooms) {
-										return function (user) {
-											return function (allGames) {
-												return function (ignoredGames) {
-													return {allGames: allGames, colorInProgress: colorInProgress, debugString: debugString, ignoredGames: ignoredGames, nameInProgress: nameInProgress, rooms: rooms, showEmptyRooms: showEmptyRooms, showFullRooms: showFullRooms, sorting: sorting, toggleModal: toggleModal, toggleOptions: toggleOptions, toggleView: toggleView, user: user};
+			return function (roomNameInProgress) {
+				return function (roomNumInProgress) {
+					return function (roomGameInProgress) {
+						return function (rooms) {
+							return function (sorting) {
+								return function (toggleModal) {
+									return function (toggleOptions) {
+										return function (toggleView) {
+											return function (showFullRooms) {
+												return function (showEmptyRooms) {
+													return function (user) {
+														return function (allGames) {
+															return function (ignoredGames) {
+																return {allGames: allGames, colorInProgress: colorInProgress, debugString: debugString, ignoredGames: ignoredGames, nameInProgress: nameInProgress, roomGameInProgress: roomGameInProgress, roomNameInProgress: roomNameInProgress, roomNumInProgress: roomNumInProgress, rooms: rooms, showEmptyRooms: showEmptyRooms, showFullRooms: showFullRooms, sorting: sorting, toggleModal: toggleModal, toggleOptions: toggleOptions, toggleView: toggleView, user: user};
+															};
+														};
+													};
 												};
 											};
 										};
@@ -5186,7 +5192,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Lobby$init = function (_v0) {
 	return _Utils_Tuple2(
-		$author$project$Lobby$Model('Initialized model.')('')('')($elm$core$Maybe$Nothing)(
+		$author$project$Lobby$Model('Initialized model.')('')('')('')('')('')($elm$core$Maybe$Nothing)(
 			_Utils_Tuple2('room_name', false))(false)(false)('rooms')(true)(true)(
 			A7($author$project$User$User, 'Uninitialized', '', '#555759', 0, 0, false, false))(_List_Nil)($elm$core$Set$empty),
 		$elm$core$Platform$Cmd$none);
@@ -5621,6 +5627,9 @@ var $author$project$Lobby$subscriptions = function (_v0) {
 				$author$project$Lobby$inputPort($author$project$Lobby$GetJSON)
 			]));
 };
+var $author$project$Lobby$GetRedirect = function (a) {
+	return {$: 'GetRedirect', a: a};
+};
 var $author$project$Lobby$GetRoomsList = function (a) {
 	return {$: 'GetRoomsList', a: a};
 };
@@ -5773,6 +5782,12 @@ var $author$project$Lobby$update = F2(
 								msg = $temp$msg;
 								model = $temp$model;
 								continue update;
+							case 'redirect':
+								var $temp$msg = $author$project$Lobby$GetRedirect(content),
+									$temp$model = model;
+								msg = $temp$msg;
+								model = $temp$model;
+								continue update;
 							default:
 								return _Utils_Tuple2(
 									A2($elm$core$Debug$log, 'Error: unknown code in JSON message', model),
@@ -5787,11 +5802,57 @@ var $author$project$Lobby$update = F2(
 								}),
 							$elm$core$Platform$Cmd$none);
 					}
+				case 'CreateRoom':
+					return _Utils_Tuple2(
+						model,
+						$author$project$Lobby$outputPort(
+							A2(
+								$elm$json$Json$Encode$encode,
+								0,
+								$elm$json$Json$Encode$object(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'action',
+											$elm$json$Json$Encode$string('create_room')),
+											_Utils_Tuple2(
+											'content',
+											$elm$json$Json$Encode$object(
+												_List_fromArray(
+													[
+														_Utils_Tuple2(
+														'room_name',
+														$elm$json$Json$Encode$string(model.roomNameInProgress)),
+														_Utils_Tuple2(
+														'game_name',
+														$elm$json$Json$Encode$string(model.roomGameInProgress)),
+														_Utils_Tuple2(
+														'player_limit',
+														$elm$json$Json$Encode$string(model.roomNumInProgress))
+													])))
+										])))));
+				case 'GetRedirect':
+					var json = _v0.a;
+					var _v3 = A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, json);
+					if (_v3.$ === 'Ok') {
+						var url = _v3.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{debugString: 'URL: ' + url}),
+							$elm$core$Platform$Cmd$none);
+					} else {
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{debugString: 'Error parsing userlist JSON'}),
+							$elm$core$Platform$Cmd$none);
+					}
 				case 'GetRoomsList':
 					var json = _v0.a;
-					var _v3 = A2($elm$json$Json$Decode$decodeValue, $author$project$Room$decodeRoomsList, json);
-					if (_v3.$ === 'Ok') {
-						var roomsList = _v3.a;
+					var _v4 = A2($elm$json$Json$Decode$decodeValue, $author$project$Room$decodeRoomsList, json);
+					if (_v4.$ === 'Ok') {
+						var roomsList = _v4.a;
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
@@ -5817,9 +5878,9 @@ var $author$project$Lobby$update = F2(
 					}
 				case 'GetUser':
 					var json = _v0.a;
-					var _v4 = A2($elm$json$Json$Decode$decodeValue, $author$project$User$decodeUser, json);
-					if (_v4.$ === 'Ok') {
-						var user = _v4.a;
+					var _v5 = A2($elm$json$Json$Decode$decodeValue, $author$project$User$decodeUser, json);
+					if (_v5.$ === 'Ok') {
+						var user = _v5.a;
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
@@ -5874,6 +5935,27 @@ var $author$project$Lobby$update = F2(
 						_Utils_update(
 							model,
 							{colorInProgress: color}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomName':
+					var str = _v0.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomNameInProgress: str}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomMaxPlayers':
+					var str = _v0.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomNumInProgress: str}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomGameName':
+					var str = _v0.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomGameInProgress: str}),
 						$elm$core$Platform$Cmd$none);
 				case 'UpdateSettings':
 					var oldUser = model.user;
@@ -5941,9 +6023,19 @@ var $author$project$Lobby$update = F2(
 			}
 		}
 	});
+var $author$project$Lobby$CreateRoom = {$: 'CreateRoom'};
 var $author$project$Lobby$Refresh = {$: 'Refresh'};
 var $author$project$Lobby$SetColor = function (a) {
 	return {$: 'SetColor', a: a};
+};
+var $author$project$Lobby$SetRoomGameName = function (a) {
+	return {$: 'SetRoomGameName', a: a};
+};
+var $author$project$Lobby$SetRoomMaxPlayers = function (a) {
+	return {$: 'SetRoomMaxPlayers', a: a};
+};
+var $author$project$Lobby$SetRoomName = function (a) {
+	return {$: 'SetRoomName', a: a};
 };
 var $author$project$Lobby$SetSorting = F2(
 	function (a, b) {
@@ -6470,6 +6562,39 @@ var $author$project$Lobby$drawGameFilter = F2(
 					$elm$html$Html$text(game)
 				]));
 	});
+var $author$project$Lobby$Canoe = {$: 'Canoe'};
+var $author$project$Lobby$Codenames = {$: 'Codenames'};
+var $author$project$Lobby$Homeworlds = {$: 'Homeworlds'};
+var $author$project$Lobby$RicochetRobots = {$: 'RicochetRobots'};
+var $author$project$Lobby$Unknown = {$: 'Unknown'};
+var $author$project$Lobby$getGameName = function (s) {
+	switch (s) {
+		case 'Canoe':
+			return $author$project$Lobby$Canoe;
+		case 'Codenames':
+			return $author$project$Lobby$Codenames;
+		case 'Homeworlds':
+			return $author$project$Lobby$Homeworlds;
+		case 'Ricochet Robots':
+			return $author$project$Lobby$RicochetRobots;
+		default:
+			return $author$project$Lobby$Unknown;
+	}
+};
+var $author$project$Lobby$getURL = function (gn) {
+	switch (gn.$) {
+		case 'Canoe':
+			return 'http://localhost:8002/Canoe.html?room=';
+		case 'Codenames':
+			return 'http://localhost:8004/Codenames.html?room=';
+		case 'Homeworlds':
+			return 'http://localhost:8005/Homeworlds.html?room=';
+		case 'RicochetRobots':
+			return 'http://localhost:8003/Robots.html?room=';
+		default:
+			return 'http://localhost:8001/Lobby.html?room=';
+	}
+};
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6477,6 +6602,8 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $author$project$Lobby$drawRoom = function (room) {
+	var gn = $author$project$Lobby$getGameName(room.game_name);
+	var url = $author$project$Lobby$getURL(gn);
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -6536,7 +6663,8 @@ var $author$project$Lobby$drawRoom = function (room) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('button'),
-								$elm$html$Html$Attributes$href('http://localhost:8000/Robots.html?room=' + room.room_name)
+								$elm$html$Html$Attributes$href(
+								_Utils_ap(url, room.room_name))
 							]),
 						_List_fromArray(
 							[
@@ -7368,7 +7496,8 @@ var $author$project$Lobby$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$type_('text'),
-												$elm$html$Html$Attributes$placeholder('Room name')
+												$elm$html$Html$Attributes$placeholder('Room name'),
+												$elm$html$Html$Events$onInput($author$project$Lobby$SetRoomName)
 											]),
 										_List_Nil)
 									])),
@@ -7385,14 +7514,16 @@ var $author$project$Lobby$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$type_('text'),
-												$elm$html$Html$Attributes$placeholder('Max players')
+												$elm$html$Html$Attributes$placeholder('Max players'),
+												$elm$html$Html$Events$onInput($author$project$Lobby$SetRoomMaxPlayers)
 											]),
 										_List_Nil),
 										A2(
 										$elm$html$Html$select,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('game_name')
+												$elm$html$Html$Attributes$class('game_name'),
+												$elm$html$Html$Events$onInput($author$project$Lobby$SetRoomGameName)
 											]),
 										_List_fromArray(
 											[
@@ -7410,7 +7541,7 @@ var $author$project$Lobby$view = function (model) {
 												$elm$html$Html$option,
 												_List_fromArray(
 													[
-														$elm$html$Html$Attributes$value('canoe')
+														$elm$html$Html$Attributes$value('Canoe')
 													]),
 												_List_fromArray(
 													[
@@ -7420,7 +7551,7 @@ var $author$project$Lobby$view = function (model) {
 												$elm$html$Html$option,
 												_List_fromArray(
 													[
-														$elm$html$Html$Attributes$value('codenames')
+														$elm$html$Html$Attributes$value('Codenames')
 													]),
 												_List_fromArray(
 													[
@@ -7430,7 +7561,17 @@ var $author$project$Lobby$view = function (model) {
 												$elm$html$Html$option,
 												_List_fromArray(
 													[
-														$elm$html$Html$Attributes$value('robots')
+														$elm$html$Html$Attributes$value('Homeworlds')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Homeworlds')
+													])),
+												A2(
+												$elm$html$Html$option,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$value('Ricochet Robots')
 													]),
 												_List_fromArray(
 													[
@@ -7461,7 +7602,8 @@ var $author$project$Lobby$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('button--create button--big')
+												$elm$html$Html$Attributes$class('button--create button--big'),
+												$elm$html$Html$Events$onClick($author$project$Lobby$CreateRoom)
 											]),
 										_List_fromArray(
 											[
