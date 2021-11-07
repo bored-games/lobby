@@ -273,6 +273,10 @@ main {
   transition: .1s linear opacity, .1s linear text-decoration;
 }
 
+.sidebar_box li:hover {
+  color: #e0e0e0;
+}
+
 .sidebar_box li.inactive {
   opacity: 0.4;
   text-decoration: line-through;

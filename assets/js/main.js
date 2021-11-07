@@ -6584,15 +6584,15 @@ var $author$project$Lobby$getGameName = function (s) {
 var $author$project$Lobby$getURL = function (gn) {
 	switch (gn.$) {
 		case 'Canoe':
-			return 'http://localhost:8002/Canoe.html?room=';
+			return './canoe/?room=';
 		case 'Codenames':
-			return 'http://localhost:8004/Codenames.html?room=';
+			return './codenames/?room=';
 		case 'Homeworlds':
-			return 'http://localhost:8005/Homeworlds.html?room=';
+			return './homeworlds/?room=';
 		case 'RicochetRobots':
-			return 'http://localhost:8003/Robots.html?room=';
+			return './robots/?room=';
 		default:
-			return 'http://localhost:8001/Lobby.html?room=';
+			return './lobby/?room=';
 	}
 };
 var $elm$html$Html$Attributes$href = function (url) {

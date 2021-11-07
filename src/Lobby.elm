@@ -314,11 +314,11 @@ drawRooms mayberooms (key, asc) ignoredGames showFullRooms showEmptyRooms =
 getURL : GameName -> String
 getURL gn =
   case gn of
-     Canoe -> "http://localhost:8002/Canoe.html?room="
-     Codenames -> "http://localhost:8004/Codenames.html?room="
-     Homeworlds -> "http://localhost:8005/Homeworlds.html?room="
-     RicochetRobots -> "http://localhost:8003/Robots.html?room="
-     Unknown -> "http://localhost:8001/Lobby.html?room="
+     Canoe -> "./canoe/?room="
+     Codenames -> "./codenames/?room="
+     Homeworlds -> "./homeworlds/?room="
+     RicochetRobots -> "./robots/?room="
+     Unknown -> "./lobby/?room="
      
 getGameName : String -> GameName
 getGameName s =
