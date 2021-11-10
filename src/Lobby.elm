@@ -163,8 +163,8 @@ update msg model =
     GetRedirect json ->
       case Json.Decode.decodeValue Json.Decode.string json of
         Ok url ->
-          ( { model | debugString = "URL: " ++ url }, Cmd.none )
-          -- (model , Nav.load url )
+          -- ( { model | debugString = "URL: " ++ url }, Cmd.none )
+          (model , Nav.load url )
         Err _ ->
           ( { model | debugString = "Error parsing userlist JSON"}, Cmd.none )
 

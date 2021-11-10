@@ -5730,6 +5730,7 @@ var $elm$core$Set$insert = F2(
 var $elm$core$Set$fromList = function (list) {
 	return A3($elm$core$List$foldl, $elm$core$Set$insert, $elm$core$Set$empty, list);
 };
+var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Basics$not = _Basics_not;
 var $author$project$Lobby$outputPort = _Platform_outgoingPort('outputPort', $elm$json$Json$Encode$string);
@@ -5837,10 +5838,8 @@ var $author$project$Lobby$update = F2(
 					if (_v3.$ === 'Ok') {
 						var url = _v3.a;
 						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{debugString: 'URL: ' + url}),
-							$elm$core$Platform$Cmd$none);
+							model,
+							$elm$browser$Browser$Navigation$load(url));
 					} else {
 						return _Utils_Tuple2(
 							_Utils_update(
