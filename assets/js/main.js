@@ -5623,7 +5623,7 @@ var $author$project$Lobby$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$batch(
 		_List_fromArray(
 			[
-				A2($elm$time$Time$every, 50000, $author$project$Lobby$Ping),
+				A2($elm$time$Time$every, 30000, $author$project$Lobby$Ping),
 				$author$project$Lobby$inputPort($author$project$Lobby$GetJSON)
 			]));
 };
@@ -5738,10 +5738,9 @@ var $author$project$Lobby$update = F2(
 	function (msg, model) {
 		update:
 		while (true) {
-			var _v0 = A2($elm$core$Debug$log, 'MESSAGE: ', msg);
-			switch (_v0.$) {
+			switch (msg.$) {
 				case 'Ping':
-					var newTime = _v0.a;
+					var newTime = msg.a;
 					return _Utils_Tuple2(
 						model,
 						$author$project$Lobby$outputPort(
@@ -5759,7 +5758,7 @@ var $author$project$Lobby$update = F2(
 											$elm$json$Json$Encode$string('ping'))
 										])))));
 				case 'GetJSON':
-					var json = _v0.a;
+					var json = msg.a;
 					var _v1 = A2($elm$json$Json$Decode$decodeValue, $author$project$Lobby$decodeJSON, json);
 					if (_v1.$ === 'Ok') {
 						var action = _v1.a.action;
@@ -5789,6 +5788,8 @@ var $author$project$Lobby$update = F2(
 								msg = $temp$msg;
 								model = $temp$model;
 								continue update;
+							case 'ping':
+								return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 							default:
 								return _Utils_Tuple2(
 									A2($elm$core$Debug$log, 'Error: unknown code in JSON message', model),
@@ -5833,7 +5834,7 @@ var $author$project$Lobby$update = F2(
 													])))
 										])))));
 				case 'GetRedirect':
-					var json = _v0.a;
+					var json = msg.a;
 					var _v3 = A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, json);
 					if (_v3.$ === 'Ok') {
 						var url = _v3.a;
@@ -5848,7 +5849,7 @@ var $author$project$Lobby$update = F2(
 							$elm$core$Platform$Cmd$none);
 					}
 				case 'GetRoomsList':
-					var json = _v0.a;
+					var json = msg.a;
 					var _v4 = A2($elm$json$Json$Decode$decodeValue, $author$project$Room$decodeRoomsList, json);
 					if (_v4.$ === 'Ok') {
 						var roomsList = _v4.a;
@@ -5876,7 +5877,7 @@ var $author$project$Lobby$update = F2(
 							$elm$core$Platform$Cmd$none);
 					}
 				case 'GetUser':
-					var json = _v0.a;
+					var json = msg.a;
 					var _v5 = A2($elm$json$Json$Decode$decodeValue, $author$project$User$decodeUser, json);
 					if (_v5.$ === 'Ok') {
 						var user = _v5.a;
@@ -5893,8 +5894,8 @@ var $author$project$Lobby$update = F2(
 							$elm$core$Platform$Cmd$none);
 					}
 				case 'SetSorting':
-					var key = _v0.a;
-					var asc = _v0.b;
+					var key = msg.a;
+					var asc = msg.b;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -5922,35 +5923,35 @@ var $author$project$Lobby$update = F2(
 											$elm$json$Json$Encode$string(''))
 										])))));
 				case 'SetName':
-					var name = _v0.a;
+					var name = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{nameInProgress: name}),
 						$elm$core$Platform$Cmd$none);
 				case 'SetColor':
-					var color = _v0.a;
+					var color = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{colorInProgress: color}),
 						$elm$core$Platform$Cmd$none);
 				case 'SetRoomName':
-					var str = _v0.a;
+					var str = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{roomNameInProgress: str}),
 						$elm$core$Platform$Cmd$none);
 				case 'SetRoomMaxPlayers':
-					var str = _v0.a;
+					var str = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{roomNumInProgress: str}),
 						$elm$core$Platform$Cmd$none);
 				case 'SetRoomGameName':
-					var str = _v0.a;
+					var str = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -5994,7 +5995,7 @@ var $author$project$Lobby$update = F2(
 							{toggleOptions: !model.toggleOptions}),
 						$elm$core$Platform$Cmd$none);
 				case 'ToggleView':
-					var v = _v0.a;
+					var v = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -6013,7 +6014,7 @@ var $author$project$Lobby$update = F2(
 							{showEmptyRooms: !model.showEmptyRooms}),
 						$elm$core$Platform$Cmd$none);
 				default:
-					var ignoredGames = _v0.a;
+					var ignoredGames = msg.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,

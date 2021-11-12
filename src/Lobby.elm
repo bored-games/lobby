@@ -120,7 +120,7 @@ type Msg
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  case Debug.log "MESSAGE: " msg of
+  case msg of
     Ping newTime ->
       ( model
       , outputPort (Json.Encode.encode
@@ -142,6 +142,8 @@ update msg model =
               update (GetUser content) model
             "redirect" ->
               update (GetRedirect content) model
+            "ping" ->
+              ( model, Cmd.none )
 
             _ ->
               ((Debug.log "Error: unknown code in JSON message" model), Cmd.none ) -- Error: missing code
