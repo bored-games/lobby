@@ -272,7 +272,7 @@ port inputPort : (Json.Encode.Value -> msg) -> Sub msg
 subscriptions : Model -> Sub Msg
 subscriptions _ =
   Sub.batch
-    [ Time.every 50000 Ping
+    [ Time.every 30000 Ping
     , inputPort GetJSON
     ]
 
