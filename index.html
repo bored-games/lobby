@@ -22,8 +22,12 @@
   
   function setupSocket() {
     socket = new WebSocket(server_host) // remove Sec-Websocket-Protocol
+    var startct = Date.now();
 
     socket.onclose = function() {
+      var delta = Date.now() - start; // milliseconds elapsed since start
+      alert(Math.floor(delta / 1000)); // in seconds
+
       alert("Connection to the server has been lost.");
     }
 
