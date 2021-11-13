@@ -1,4 +1,4 @@
-module User exposing (User, encodeUser, decodeUser, decodeUsersList)
+module User exposing (User, encodeUser, decodeUser, decodeUsersList, isMuted, isAdmin)
 
 import Json.Encode
 import Json.Decode
@@ -75,3 +75,14 @@ decodeUsersList2 : Json.Decode.Decoder (List User)
 decodeUsersList2 =
   Json.Decode.list decodeUser
   
+isMuted : Maybe User -> Bool
+isMuted user =
+  case user of
+    Nothing -> False
+    Just u -> u.is_muted
+
+isAdmin : Maybe User -> Bool
+isAdmin user =
+  case user of
+    Nothing -> False
+    Just u -> u.is_admin
