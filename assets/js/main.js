@@ -6845,6 +6845,7 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
 var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
@@ -6995,11 +6996,44 @@ var $author$project$Lobby$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('game--cover')
+							]),
+						_List_Nil),
+						A2(
 						$elm$html$Html$h2,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Canoe')
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('game_name')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Canoe')
+									])),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('player_info')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('2 players')
+									]))
+							])),
+						A2(
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Two players compete to build a pair of four-token \"canoes\" in this abstract strategy game.')
 							]))
 					])),
 				A2(
@@ -7011,11 +7045,44 @@ var $author$project$Lobby$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('game--cover')
+							]),
+						_List_Nil),
+						A2(
 						$elm$html$Html$h2,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Codenames')
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('game_name')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Codenames')
+									])),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('player_info')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('4+ players')
+									]))
+							])),
+						A2(
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Two teams, each led by a spymaster, take turns with clues to uncover a secret set of words.')
 							]))
 					])),
 				A2(
@@ -7027,11 +7094,44 @@ var $author$project$Lobby$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('game--cover')
+							]),
+						_List_Nil),
+						A2(
 						$elm$html$Html$h2,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Ricochet Robots')
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('game_name')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Ricochet Robots')
+									])),
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('player_info')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('1+ players')
+									]))
+							])),
+						A2(
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Compete to discover the most elegant solutions to an evolving series of puzzles.')
 							]))
 					]))
 			]));
