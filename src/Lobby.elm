@@ -116,6 +116,7 @@ type Msg
   | ToggleView String
   | ToggleShowFullRooms
   | ToggleShowEmptyRooms
+  | ShowGameRooms String
   | SetIgnoredGames (Set ( String ))
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -240,6 +241,9 @@ update msg model =
     ToggleShowEmptyRooms ->
       ( { model | showEmptyRooms =  not model.showEmptyRooms }, Cmd.none )
 
+    ShowGameRooms game ->
+      ( { model | ignoredGames =  setUnignoredGame game model.allGames, toggleView = "rooms" }, Cmd.none )
+
     SetIgnoredGames ignoredGames ->
       ( { model | ignoredGames = ignoredGames }, Cmd.none )
 
@@ -258,6 +262,9 @@ countRooms rooms =
      Nothing -> 0
      Just rs -> List.length rs
 
+setUnignoredGame : String -> List ( String ) -> Set ( String )
+setUnignoredGame g allGames =
+  Set.remove g (Set.fromList allGames)
 
 
 countPlayers : Maybe ( List ( Room ) ) -> Int
@@ -379,19 +386,19 @@ view model =
         ]
       )
     games_table = div [ class "games_table" ]
-      [ div [ class "game game--canoe" ]
+      [ div [ class "game game--canoe", onClick (ShowGameRooms "Canoe") ]
         [ div [ class "game--cover" ] []
         , h2 []
           [ span [ class "game_name" ] [ text "Canoe" ]
           , span [ class "player_info" ] [ text "2 players" ] ]
         , p [] [ text "Two players compete to build a pair of four-token \"canoes\" in this abstract strategy game." ]]
-      , div [ class "game game--codenames" ]
+      , div [ class "game game--codenames", onClick (ShowGameRooms "Codenames") ]
         [ div [ class "game--cover" ] []
         , h2 []
           [ span [ class "game_name" ] [ text "Codenames" ]
           , span [ class "player_info" ] [ text "4+ players" ] ]
         , p [] [ text "Two teams, each led by a spymaster, take turns with clues to uncover a secret set of words." ]]
-      , div [ class "game game--robots" ]
+      , div [ class "game game--robots", onClick (ShowGameRooms "Ricochet Robots") ]
         [ div [ class "game--cover" ] []
         , h2 []
           [ span [ class "game_name" ] [ text "Ricochet Robots" ]

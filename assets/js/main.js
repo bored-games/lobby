@@ -5734,409 +5734,6 @@ var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Basics$not = _Basics_not;
 var $author$project$Lobby$outputPort = _Platform_outgoingPort('outputPort', $elm$json$Json$Encode$string);
-var $author$project$Lobby$update = F2(
-	function (msg, model) {
-		update:
-		while (true) {
-			switch (msg.$) {
-				case 'Ping':
-					var newTime = msg.a;
-					return _Utils_Tuple2(
-						model,
-						$author$project$Lobby$outputPort(
-							A2(
-								$elm$json$Json$Encode$encode,
-								0,
-								$elm$json$Json$Encode$object(
-									_List_fromArray(
-										[
-											_Utils_Tuple2(
-											'action',
-											$elm$json$Json$Encode$string('ping')),
-											_Utils_Tuple2(
-											'content',
-											$elm$json$Json$Encode$string('ping'))
-										])))));
-				case 'GetJSON':
-					var json = msg.a;
-					var _v1 = A2($elm$json$Json$Decode$decodeValue, $author$project$Lobby$decodeJSON, json);
-					if (_v1.$ === 'Ok') {
-						var action = _v1.a.action;
-						var content = _v1.a.content;
-						switch (action) {
-							case 'connect_to_server':
-								var $temp$msg = $author$project$Lobby$SetName('TODO'),
-									$temp$model = model;
-								msg = $temp$msg;
-								model = $temp$model;
-								continue update;
-							case 'update_rooms':
-								var $temp$msg = $author$project$Lobby$GetRoomsList(content),
-									$temp$model = model;
-								msg = $temp$msg;
-								model = $temp$model;
-								continue update;
-							case 'update_user':
-								var $temp$msg = $author$project$Lobby$GetUser(content),
-									$temp$model = model;
-								msg = $temp$msg;
-								model = $temp$model;
-								continue update;
-							case 'redirect':
-								var $temp$msg = $author$project$Lobby$GetRedirect(content),
-									$temp$model = model;
-								msg = $temp$msg;
-								model = $temp$model;
-								continue update;
-							case 'ping':
-								return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-							default:
-								return _Utils_Tuple2(
-									A2($elm$core$Debug$log, 'Error: unknown code in JSON message', model),
-									$elm$core$Platform$Cmd$none);
-						}
-					} else {
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{
-									debugString: 'Bad JSON: ' + A2($elm$json$Json$Encode$encode, 0, json)
-								}),
-							$elm$core$Platform$Cmd$none);
-					}
-				case 'CreateRoom':
-					return _Utils_Tuple2(
-						model,
-						$author$project$Lobby$outputPort(
-							A2(
-								$elm$json$Json$Encode$encode,
-								0,
-								$elm$json$Json$Encode$object(
-									_List_fromArray(
-										[
-											_Utils_Tuple2(
-											'action',
-											$elm$json$Json$Encode$string('create_room')),
-											_Utils_Tuple2(
-											'content',
-											$elm$json$Json$Encode$object(
-												_List_fromArray(
-													[
-														_Utils_Tuple2(
-														'room_name',
-														$elm$json$Json$Encode$string(model.roomNameInProgress)),
-														_Utils_Tuple2(
-														'game_name',
-														$elm$json$Json$Encode$string(model.roomGameInProgress)),
-														_Utils_Tuple2(
-														'player_limit',
-														$elm$json$Json$Encode$string(model.roomNumInProgress))
-													])))
-										])))));
-				case 'GetRedirect':
-					var json = msg.a;
-					var _v3 = A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, json);
-					if (_v3.$ === 'Ok') {
-						var url = _v3.a;
-						return _Utils_Tuple2(
-							model,
-							$elm$browser$Browser$Navigation$load(url));
-					} else {
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{debugString: 'Error parsing userlist JSON'}),
-							$elm$core$Platform$Cmd$none);
-					}
-				case 'GetRoomsList':
-					var json = msg.a;
-					var _v4 = A2($elm$json$Json$Decode$decodeValue, $author$project$Room$decodeRoomsList, json);
-					if (_v4.$ === 'Ok') {
-						var roomsList = _v4.a;
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{
-									allGames: $elm$core$Set$toList(
-										$elm$core$Set$fromList(
-											A2(
-												$elm$core$List$map,
-												function ($) {
-													return $.game_name;
-												},
-												roomsList))),
-									debugString: 'Populated room list',
-									rooms: $elm$core$Maybe$Just(roomsList)
-								}),
-							$elm$core$Platform$Cmd$none);
-					} else {
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{debugString: 'Error parsing userlist JSON'}),
-							$elm$core$Platform$Cmd$none);
-					}
-				case 'GetUser':
-					var json = msg.a;
-					var _v5 = A2($elm$json$Json$Decode$decodeValue, $author$project$User$decodeUser, json);
-					if (_v5.$ === 'Ok') {
-						var user = _v5.a;
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{colorInProgress: user.color, debugString: 'Updated user', user: user}),
-							$elm$core$Platform$Cmd$none);
-					} else {
-						return _Utils_Tuple2(
-							_Utils_update(
-								model,
-								{debugString: 'Error parsing user JSON'}),
-							$elm$core$Platform$Cmd$none);
-					}
-				case 'SetSorting':
-					var key = msg.a;
-					var asc = msg.b;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								sorting: _Utils_Tuple2(key, !asc)
-							}),
-						$elm$core$Platform$Cmd$none);
-				case 'Refresh':
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{rooms: $elm$core$Maybe$Nothing}),
-						$author$project$Lobby$outputPort(
-							A2(
-								$elm$json$Json$Encode$encode,
-								0,
-								$elm$json$Json$Encode$object(
-									_List_fromArray(
-										[
-											_Utils_Tuple2(
-											'action',
-											$elm$json$Json$Encode$string('get_rooms')),
-											_Utils_Tuple2(
-											'content',
-											$elm$json$Json$Encode$string(''))
-										])))));
-				case 'SetName':
-					var name = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{nameInProgress: name}),
-						$elm$core$Platform$Cmd$none);
-				case 'SetColor':
-					var color = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{colorInProgress: color}),
-						$elm$core$Platform$Cmd$none);
-				case 'SetRoomName':
-					var str = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{roomNameInProgress: str}),
-						$elm$core$Platform$Cmd$none);
-				case 'SetRoomMaxPlayers':
-					var str = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{roomNumInProgress: str}),
-						$elm$core$Platform$Cmd$none);
-				case 'SetRoomGameName':
-					var str = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{roomGameInProgress: str}),
-						$elm$core$Platform$Cmd$none);
-				case 'UpdateSettings':
-					var oldUser = model.user;
-					var newName = ($elm$core$String$length(model.nameInProgress) > 0) ? model.nameInProgress : model.user.nickname;
-					var newColor = model.colorInProgress;
-					var newUser = _Utils_update(
-						oldUser,
-						{color: newColor, nickname: newName});
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{nameInProgress: '', toggleOptions: false}),
-						$author$project$Lobby$outputPort(
-							A2(
-								$elm$json$Json$Encode$encode,
-								0,
-								$elm$json$Json$Encode$object(
-									_List_fromArray(
-										[
-											_Utils_Tuple2(
-											'action',
-											$elm$json$Json$Encode$string('update_user')),
-											_Utils_Tuple2(
-											'content',
-											$author$project$User$encodeUser(newUser))
-										])))));
-				case 'ToggleModal':
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{toggleModal: !model.toggleModal}),
-						$elm$core$Platform$Cmd$none);
-				case 'ToggleOptions':
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{toggleOptions: !model.toggleOptions}),
-						$elm$core$Platform$Cmd$none);
-				case 'ToggleView':
-					var v = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{toggleView: v}),
-						$elm$core$Platform$Cmd$none);
-				case 'ToggleShowFullRooms':
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{showFullRooms: !model.showFullRooms}),
-						$elm$core$Platform$Cmd$none);
-				case 'ToggleShowEmptyRooms':
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{showEmptyRooms: !model.showEmptyRooms}),
-						$elm$core$Platform$Cmd$none);
-				default:
-					var ignoredGames = msg.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{ignoredGames: ignoredGames}),
-						$elm$core$Platform$Cmd$none);
-			}
-		}
-	});
-var $author$project$Lobby$CreateRoom = {$: 'CreateRoom'};
-var $author$project$Lobby$Refresh = {$: 'Refresh'};
-var $author$project$Lobby$SetColor = function (a) {
-	return {$: 'SetColor', a: a};
-};
-var $author$project$Lobby$SetRoomGameName = function (a) {
-	return {$: 'SetRoomGameName', a: a};
-};
-var $author$project$Lobby$SetRoomMaxPlayers = function (a) {
-	return {$: 'SetRoomMaxPlayers', a: a};
-};
-var $author$project$Lobby$SetRoomName = function (a) {
-	return {$: 'SetRoomName', a: a};
-};
-var $author$project$Lobby$SetSorting = F2(
-	function (a, b) {
-		return {$: 'SetSorting', a: a, b: b};
-	});
-var $author$project$Lobby$ToggleModal = {$: 'ToggleModal'};
-var $author$project$Lobby$ToggleOptions = {$: 'ToggleOptions'};
-var $author$project$Lobby$ToggleShowEmptyRooms = {$: 'ToggleShowEmptyRooms'};
-var $author$project$Lobby$ToggleShowFullRooms = {$: 'ToggleShowFullRooms'};
-var $author$project$Lobby$ToggleView = function (a) {
-	return {$: 'ToggleView', a: a};
-};
-var $author$project$Lobby$UpdateSettings = {$: 'UpdateSettings'};
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
-var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
-};
-var $author$project$Lobby$countPlayers = function (rooms) {
-	if (rooms.$ === 'Nothing') {
-		return 0;
-	} else {
-		var rs = rooms.a;
-		return A3(
-			$elm$core$List$foldl,
-			F2(
-				function (x, y) {
-					return x.current_players + y;
-				}),
-			0,
-			rs);
-	}
-};
-var $author$project$Lobby$countRooms = function (rooms) {
-	if (rooms.$ === 'Nothing') {
-		return 0;
-	} else {
-		var rs = rooms.a;
-		return $elm$core$List$length(rs);
-	}
-};
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Lobby$SetIgnoredGames = function (a) {
-	return {$: 'SetIgnoredGames', a: a};
-};
-var $elm$html$Html$li = _VirtualDom_node('li');
-var $elm$core$Dict$member = F2(
-	function (key, dict) {
-		var _v0 = A2($elm$core$Dict$get, key, dict);
-		if (_v0.$ === 'Just') {
-			return true;
-		} else {
-			return false;
-		}
-	});
-var $elm$core$Set$member = F2(
-	function (key, _v0) {
-		var dict = _v0.a;
-		return A2($elm$core$Dict$member, key, dict);
-	});
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
 var $elm$core$Dict$getMin = function (dict) {
 	getMin:
 	while (true) {
@@ -6505,6 +6102,429 @@ var $elm$core$Set$remove = F2(
 		return $elm$core$Set$Set_elm_builtin(
 			A2($elm$core$Dict$remove, key, dict));
 	});
+var $author$project$Lobby$setUnignoredGame = F2(
+	function (g, allGames) {
+		return A2(
+			$elm$core$Set$remove,
+			g,
+			$elm$core$Set$fromList(allGames));
+	});
+var $author$project$Lobby$update = F2(
+	function (msg, model) {
+		update:
+		while (true) {
+			switch (msg.$) {
+				case 'Ping':
+					var newTime = msg.a;
+					return _Utils_Tuple2(
+						model,
+						$author$project$Lobby$outputPort(
+							A2(
+								$elm$json$Json$Encode$encode,
+								0,
+								$elm$json$Json$Encode$object(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'action',
+											$elm$json$Json$Encode$string('ping')),
+											_Utils_Tuple2(
+											'content',
+											$elm$json$Json$Encode$string('ping'))
+										])))));
+				case 'GetJSON':
+					var json = msg.a;
+					var _v1 = A2($elm$json$Json$Decode$decodeValue, $author$project$Lobby$decodeJSON, json);
+					if (_v1.$ === 'Ok') {
+						var action = _v1.a.action;
+						var content = _v1.a.content;
+						switch (action) {
+							case 'connect_to_server':
+								var $temp$msg = $author$project$Lobby$SetName('TODO'),
+									$temp$model = model;
+								msg = $temp$msg;
+								model = $temp$model;
+								continue update;
+							case 'update_rooms':
+								var $temp$msg = $author$project$Lobby$GetRoomsList(content),
+									$temp$model = model;
+								msg = $temp$msg;
+								model = $temp$model;
+								continue update;
+							case 'update_user':
+								var $temp$msg = $author$project$Lobby$GetUser(content),
+									$temp$model = model;
+								msg = $temp$msg;
+								model = $temp$model;
+								continue update;
+							case 'redirect':
+								var $temp$msg = $author$project$Lobby$GetRedirect(content),
+									$temp$model = model;
+								msg = $temp$msg;
+								model = $temp$model;
+								continue update;
+							case 'ping':
+								return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+							default:
+								return _Utils_Tuple2(
+									A2($elm$core$Debug$log, 'Error: unknown code in JSON message', model),
+									$elm$core$Platform$Cmd$none);
+						}
+					} else {
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{
+									debugString: 'Bad JSON: ' + A2($elm$json$Json$Encode$encode, 0, json)
+								}),
+							$elm$core$Platform$Cmd$none);
+					}
+				case 'CreateRoom':
+					return _Utils_Tuple2(
+						model,
+						$author$project$Lobby$outputPort(
+							A2(
+								$elm$json$Json$Encode$encode,
+								0,
+								$elm$json$Json$Encode$object(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'action',
+											$elm$json$Json$Encode$string('create_room')),
+											_Utils_Tuple2(
+											'content',
+											$elm$json$Json$Encode$object(
+												_List_fromArray(
+													[
+														_Utils_Tuple2(
+														'room_name',
+														$elm$json$Json$Encode$string(model.roomNameInProgress)),
+														_Utils_Tuple2(
+														'game_name',
+														$elm$json$Json$Encode$string(model.roomGameInProgress)),
+														_Utils_Tuple2(
+														'player_limit',
+														$elm$json$Json$Encode$string(model.roomNumInProgress))
+													])))
+										])))));
+				case 'GetRedirect':
+					var json = msg.a;
+					var _v3 = A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, json);
+					if (_v3.$ === 'Ok') {
+						var url = _v3.a;
+						return _Utils_Tuple2(
+							model,
+							$elm$browser$Browser$Navigation$load(url));
+					} else {
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{debugString: 'Error parsing userlist JSON'}),
+							$elm$core$Platform$Cmd$none);
+					}
+				case 'GetRoomsList':
+					var json = msg.a;
+					var _v4 = A2($elm$json$Json$Decode$decodeValue, $author$project$Room$decodeRoomsList, json);
+					if (_v4.$ === 'Ok') {
+						var roomsList = _v4.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{
+									allGames: $elm$core$Set$toList(
+										$elm$core$Set$fromList(
+											A2(
+												$elm$core$List$map,
+												function ($) {
+													return $.game_name;
+												},
+												roomsList))),
+									debugString: 'Populated room list',
+									rooms: $elm$core$Maybe$Just(roomsList)
+								}),
+							$elm$core$Platform$Cmd$none);
+					} else {
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{debugString: 'Error parsing userlist JSON'}),
+							$elm$core$Platform$Cmd$none);
+					}
+				case 'GetUser':
+					var json = msg.a;
+					var _v5 = A2($elm$json$Json$Decode$decodeValue, $author$project$User$decodeUser, json);
+					if (_v5.$ === 'Ok') {
+						var user = _v5.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{colorInProgress: user.color, debugString: 'Updated user', user: user}),
+							$elm$core$Platform$Cmd$none);
+					} else {
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{debugString: 'Error parsing user JSON'}),
+							$elm$core$Platform$Cmd$none);
+					}
+				case 'SetSorting':
+					var key = msg.a;
+					var asc = msg.b;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								sorting: _Utils_Tuple2(key, !asc)
+							}),
+						$elm$core$Platform$Cmd$none);
+				case 'Refresh':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{rooms: $elm$core$Maybe$Nothing}),
+						$author$project$Lobby$outputPort(
+							A2(
+								$elm$json$Json$Encode$encode,
+								0,
+								$elm$json$Json$Encode$object(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'action',
+											$elm$json$Json$Encode$string('get_rooms')),
+											_Utils_Tuple2(
+											'content',
+											$elm$json$Json$Encode$string(''))
+										])))));
+				case 'SetName':
+					var name = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{nameInProgress: name}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetColor':
+					var color = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{colorInProgress: color}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomName':
+					var str = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomNameInProgress: str}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomMaxPlayers':
+					var str = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomNumInProgress: str}),
+						$elm$core$Platform$Cmd$none);
+				case 'SetRoomGameName':
+					var str = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{roomGameInProgress: str}),
+						$elm$core$Platform$Cmd$none);
+				case 'UpdateSettings':
+					var oldUser = model.user;
+					var newName = ($elm$core$String$length(model.nameInProgress) > 0) ? model.nameInProgress : model.user.nickname;
+					var newColor = model.colorInProgress;
+					var newUser = _Utils_update(
+						oldUser,
+						{color: newColor, nickname: newName});
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{nameInProgress: '', toggleOptions: false}),
+						$author$project$Lobby$outputPort(
+							A2(
+								$elm$json$Json$Encode$encode,
+								0,
+								$elm$json$Json$Encode$object(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'action',
+											$elm$json$Json$Encode$string('update_user')),
+											_Utils_Tuple2(
+											'content',
+											$author$project$User$encodeUser(newUser))
+										])))));
+				case 'ToggleModal':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{toggleModal: !model.toggleModal}),
+						$elm$core$Platform$Cmd$none);
+				case 'ToggleOptions':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{toggleOptions: !model.toggleOptions}),
+						$elm$core$Platform$Cmd$none);
+				case 'ToggleView':
+					var v = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{toggleView: v}),
+						$elm$core$Platform$Cmd$none);
+				case 'ToggleShowFullRooms':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{showFullRooms: !model.showFullRooms}),
+						$elm$core$Platform$Cmd$none);
+				case 'ToggleShowEmptyRooms':
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{showEmptyRooms: !model.showEmptyRooms}),
+						$elm$core$Platform$Cmd$none);
+				case 'ShowGameRooms':
+					var game = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								ignoredGames: A2($author$project$Lobby$setUnignoredGame, game, model.allGames),
+								toggleView: 'rooms'
+							}),
+						$elm$core$Platform$Cmd$none);
+				default:
+					var ignoredGames = msg.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{ignoredGames: ignoredGames}),
+						$elm$core$Platform$Cmd$none);
+			}
+		}
+	});
+var $author$project$Lobby$CreateRoom = {$: 'CreateRoom'};
+var $author$project$Lobby$Refresh = {$: 'Refresh'};
+var $author$project$Lobby$SetColor = function (a) {
+	return {$: 'SetColor', a: a};
+};
+var $author$project$Lobby$SetRoomGameName = function (a) {
+	return {$: 'SetRoomGameName', a: a};
+};
+var $author$project$Lobby$SetRoomMaxPlayers = function (a) {
+	return {$: 'SetRoomMaxPlayers', a: a};
+};
+var $author$project$Lobby$SetRoomName = function (a) {
+	return {$: 'SetRoomName', a: a};
+};
+var $author$project$Lobby$SetSorting = F2(
+	function (a, b) {
+		return {$: 'SetSorting', a: a, b: b};
+	});
+var $author$project$Lobby$ShowGameRooms = function (a) {
+	return {$: 'ShowGameRooms', a: a};
+};
+var $author$project$Lobby$ToggleModal = {$: 'ToggleModal'};
+var $author$project$Lobby$ToggleOptions = {$: 'ToggleOptions'};
+var $author$project$Lobby$ToggleShowEmptyRooms = {$: 'ToggleShowEmptyRooms'};
+var $author$project$Lobby$ToggleShowFullRooms = {$: 'ToggleShowFullRooms'};
+var $author$project$Lobby$ToggleView = function (a) {
+	return {$: 'ToggleView', a: a};
+};
+var $author$project$Lobby$UpdateSettings = {$: 'UpdateSettings'};
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $author$project$Lobby$countPlayers = function (rooms) {
+	if (rooms.$ === 'Nothing') {
+		return 0;
+	} else {
+		var rs = rooms.a;
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (x, y) {
+					return x.current_players + y;
+				}),
+			0,
+			rs);
+	}
+};
+var $author$project$Lobby$countRooms = function (rooms) {
+	if (rooms.$ === 'Nothing') {
+		return 0;
+	} else {
+		var rs = rooms.a;
+		return $elm$core$List$length(rs);
+	}
+};
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Lobby$SetIgnoredGames = function (a) {
+	return {$: 'SetIgnoredGames', a: a};
+};
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$core$Dict$member = F2(
+	function (key, dict) {
+		var _v0 = A2($elm$core$Dict$get, key, dict);
+		if (_v0.$ === 'Just') {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var $elm$core$Set$member = F2(
+	function (key, _v0) {
+		var dict = _v0.a;
+		return A2($elm$core$Dict$member, key, dict);
+	});
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Lobby$drawEmptyGameFilter = function (ignoredGames) {
@@ -6991,7 +7011,9 @@ var $author$project$Lobby$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('game game--canoe')
+						$elm$html$Html$Attributes$class('game game--canoe'),
+						$elm$html$Html$Events$onClick(
+						$author$project$Lobby$ShowGameRooms('Canoe'))
 					]),
 				_List_fromArray(
 					[
@@ -7040,7 +7062,9 @@ var $author$project$Lobby$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('game game--codenames')
+						$elm$html$Html$Attributes$class('game game--codenames'),
+						$elm$html$Html$Events$onClick(
+						$author$project$Lobby$ShowGameRooms('Codenames'))
 					]),
 				_List_fromArray(
 					[
@@ -7089,7 +7113,9 @@ var $author$project$Lobby$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('game game--robots')
+						$elm$html$Html$Attributes$class('game game--robots'),
+						$elm$html$Html$Events$onClick(
+						$author$project$Lobby$ShowGameRooms('Ricochet Robots'))
 					]),
 				_List_fromArray(
 					[
