@@ -6858,6 +6858,183 @@ var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Lobby$view = function (model) {
+	var server_table = A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('server_table')
+			]),
+		$elm$core$List$concat(
+			_List_fromArray(
+				[
+					_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('server_row server_headers')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('col_players')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$id('player_count'),
+												$elm$html$Html$Events$onClick(
+												A2($author$project$Lobby$SetSorting, 'player_count', model.sorting.b))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Player count')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('col_room_name')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h2,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												A2($author$project$Lobby$SetSorting, 'room_name', model.sorting.b))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Room name')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('col_game_name')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h2,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												A2($author$project$Lobby$SetSorting, 'game_name', model.sorting.b))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Current game')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('col_special')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h2,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('col_actions')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$id('refresh'),
+												$elm$html$Html$Events$onClick($author$project$Lobby$Refresh)
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Refresh')
+											]))
+									]))
+							]))
+					]),
+					A5($author$project$Lobby$drawRooms, model.rooms, model.sorting, model.ignoredGames, model.showFullRooms, model.showEmptyRooms)
+				])));
+	var games_table = A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('games_table')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('game game--canoe')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h2,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Canoe')
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('game game--codenames')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h2,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Codenames')
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('game game--robots')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h2,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Ricochet Robots')
+							]))
+					]))
+			]));
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -7400,126 +7577,7 @@ var $author$project$Lobby$view = function (model) {
 											]))
 									]))
 							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('server_table')
-							]),
-						$elm$core$List$concat(
-							_List_fromArray(
-								[
-									_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('server_row server_headers')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('col_players')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$button,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$id('player_count'),
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Lobby$SetSorting, 'player_count', model.sorting.b))
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('Player count')
-															]))
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('col_room_name')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$h2,
-														_List_fromArray(
-															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Lobby$SetSorting, 'room_name', model.sorting.b))
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('Room name')
-															]))
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('col_game_name')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$h2,
-														_List_fromArray(
-															[
-																$elm$html$Html$Events$onClick(
-																A2($author$project$Lobby$SetSorting, 'game_name', model.sorting.b))
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('Current game')
-															]))
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('col_special')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$h2,
-														_List_Nil,
-														_List_fromArray(
-															[
-																$elm$html$Html$text('')
-															]))
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('col_actions')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$button,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$id('refresh'),
-																$elm$html$Html$Events$onClick($author$project$Lobby$Refresh)
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('Refresh')
-															]))
-													]))
-											]))
-									]),
-									A5($author$project$Lobby$drawRooms, model.rooms, model.sorting, model.ignoredGames, model.showFullRooms, model.showEmptyRooms)
-								])))
+						(model.toggleView === 'games') ? games_table : server_table
 					])),
 				A2(
 				$elm$html$Html$div,

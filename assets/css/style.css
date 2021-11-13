@@ -264,10 +264,11 @@ main {
   padding: 0;
   background: transparent !important;
   color: #818386;
+  outline: 0;
 }
 
 .toggle_options::after {
-  font-size: 16px;
+  font-size: 18px;
   content: "\f013";
 }
 
@@ -308,6 +309,26 @@ textarea, input[type="text"], select {
 .message--loading_rooms,
 .message--no_rooms {
   opacity: 0.5;
+}
+
+.games_table {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  margin: 0 1.0rem;
+}
+
+.game {
+  flex: 1 0 calc(25% - 2rem); /* explanation below */
+  max-width: calc(25% - 2rem);
+  margin: 1rem;
+  background: #253037;
+  border-radius: 4px;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, .2);
+}
+
+.game h2 {
+  padding: 1.0rem;
 }
 
 .server_table {
