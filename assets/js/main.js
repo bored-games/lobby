@@ -6797,6 +6797,22 @@ var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $author$project$User$isAdmin = function (user) {
+	if (user.$ === 'Nothing') {
+		return false;
+	} else {
+		var u = user.a;
+		return u.is_admin;
+	}
+};
+var $author$project$User$isMuted = function (user) {
+	if (user.$ === 'Nothing') {
+		return false;
+	} else {
+		var u = user.a;
+		return u.is_muted;
+	}
+};
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -6842,7 +6858,6 @@ var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Lobby$view = function (model) {
-	var deleteXXXXXXXX = 'test';
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -6911,7 +6926,54 @@ var $author$project$Lobby$view = function (model) {
 												A2($elm$html$Html$Attributes$attribute, 'flow', 'right'),
 												A2($elm$html$Html$Attributes$attribute, 'tooltip', 'This is you!')
 											]),
-										_List_Nil)
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('icon star')
+													]),
+												_List_Nil)
+											])),
+										$author$project$User$isMuted(
+										$elm$core$Maybe$Just(model.user)) ? A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('self'),
+												A2($elm$html$Html$Attributes$attribute, 'flow', 'right'),
+												A2($elm$html$Html$Attributes$attribute, 'tooltip', 'Muted')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('icon muted')
+													]),
+												_List_Nil)
+											])) : $elm$html$Html$text(''),
+										$author$project$User$isAdmin(
+										$elm$core$Maybe$Just(model.user)) ? A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('self'),
+												A2($elm$html$Html$Attributes$attribute, 'flow', 'right'),
+												A2($elm$html$Html$Attributes$attribute, 'tooltip', 'Owner')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('icon owner')
+													]),
+												_List_Nil)
+											])) : $elm$html$Html$text('')
 									])),
 								A2(
 								$elm$html$Html$div,

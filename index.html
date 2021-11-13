@@ -25,7 +25,7 @@
     var startct = Date.now();
 
     socket.onclose = function() {
-      var delta = Date.now() - start; // milliseconds elapsed since start
+      var delta = Date.now() - startct; // milliseconds elapsed since start
       alert(Math.floor(delta / 1000)); // in seconds
 
       alert("Connection to the server has been lost.");
