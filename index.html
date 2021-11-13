@@ -21,7 +21,7 @@
   var app = Elm.Lobby.init({node:document.getElementById('elm-node')});
   
   function setupSocket() {
-    socket = new WebSocket(server_host, "123456789")
+    socket = new WebSocket(server_host) // remove Sec-Websocket-Protocol
 
     socket.onclose = function() {
       alert("Connection to the server has been lost.");
