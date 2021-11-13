@@ -367,7 +367,7 @@ view model =
   div [ class "container" ]
   [ div [ class "sidebar" ]
     [ div [ class "sidebar_box sidebar_box--user" ]
-      [ h2 [] [ text "User", button [ class "toggle_options", onClick ToggleOptions ] [] ]
+      [ h2 [] [ text "User", button [ class "icon toggle_options", onClick ToggleOptions ] [] ]
       , div [ class "username", style "color" model.user.color  ]
         [ span [ attribute "flow" "down", attribute "tooltip" ("UID: " ++ model.user.username), attribute "flow" "right" ] [ text model.user.nickname ]
         , span [ class "self", attribute "flow" "right", attribute "tooltip" "This is you!" ] [ span [ class "icon star" ] [] ]

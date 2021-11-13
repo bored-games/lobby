@@ -260,6 +260,31 @@ main {
   content: "\f4fe"
 }
 
+.toggle_options {
+  padding: 0;
+  background: transparent !important;
+  color: #818386;
+}
+
+.toggle_options::after {
+  font-size: 16px;
+  content: "\f013";
+}
+
+.toggle_options:hover {
+  color: #bcbdc0;
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
 textarea, input[type="text"], select {
   padding: 0.35rem 0.5rem;
   background: #0f1215;
@@ -278,29 +303,6 @@ textarea, input[type="text"], select {
   padding: 0.5rem 0;
   display: flex;
   justify-content: space-between;
-}
-
-.toggle_options {
-  height: 1.25rem;
-  width: 1.25rem;
-  padding: 0;
-  background-color: #818386;
-  mask: url('../static/images/icons/settings.png') center center/1.25rem 1.25rem no-repeat;
-}
-
-
-.toggle_options:hover {
-  background: #bcbdc0;
-  animation: spin 5s linear infinite;
-}
-
-@keyframes spin {
-  from {
-      transform:rotate(0deg);
-  }
-  to {
-      transform:rotate(360deg);
-  }
 }
 
 .message--loading_rooms,

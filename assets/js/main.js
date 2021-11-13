@@ -6892,7 +6892,7 @@ var $author$project$Lobby$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('toggle_options'),
+												$elm$html$Html$Attributes$class('icon toggle_options'),
 												$elm$html$Html$Events$onClick($author$project$Lobby$ToggleOptions)
 											]),
 										_List_Nil)
