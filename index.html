@@ -21,7 +21,7 @@
   var app = Elm.Lobby.init({node:document.getElementById('elm-node')});
   
   function setupSocket() {
-    socket = new WebSocket(server_host) // remove Sec-Websocket-Protocol
+    socket = new WebSocket(server_host + room_name) // remove Sec-Websocket-Protocol
     var startct = Date.now();
 
     socket.onclose = function() {
